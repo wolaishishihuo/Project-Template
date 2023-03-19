@@ -32,5 +32,7 @@ module.exports = {
         defineExpose: 'readonly',
         withDefaults: 'readonly'
     },
-    rules: {}
+    rules: {
+        'vue/multi-word-component-names': 'off'
+    }
 };
