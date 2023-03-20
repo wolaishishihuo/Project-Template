@@ -1,8 +1,9 @@
-import { type ConfigEnv, type UserConfigExport, defineConfig, loadEnv } from 'vite';
+import { type ConfigEnv, type UserConfigExport, loadEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import eslintPlugin from 'vite-plugin-eslint';
 
 // https://vitejs.dev/config/
+
 const path = require('path');
 const resolve = (dir: string) => path.resolve(__dirname, dir);
 export default (configEnv: ConfigEnv): UserConfigExport => {
@@ -45,7 +46,14 @@ export default (configEnv: ConfigEnv): UserConfigExport => {
             vue(),
             // 增加下面的配置项,这样在运行时就能检查eslint规范
             eslintPlugin({
-                include: ['src/**/*.js', 'src/**/*.vue', 'src/*.js', 'src/*.vue']
+                include: [
+                    'src/**/*.js',
+                    'src/**/*.vue',
+                    'src/*.js',
+                    'src/*.vue',
+                    'src/**/*.ts',
+                    'src/*.ts'
+                ]
             })
         ]
     };

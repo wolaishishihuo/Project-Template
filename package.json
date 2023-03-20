@@ -9,12 +9,12 @@
     "lint:script": "eslint --ext .js,.jsx,.ts,.tsx,.vue --fix  ./"
   },
   "dependencies": {
-    "babel-eslint": "^10.1.0",
     "dayjs": "^1.11.7",
     "vue": "^3.2.25",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
+    "eslint-define-config": "^1.17.0",
     "@babel/core": "^7.21.3",
     "@babel/eslint-parser": "^7.21.3",
     "@types/node": "^18.15.3",
@@ -34,8 +34,6 @@
     "vite": "^2.9.15",
     "vite-plugin-eslint": "^1.8.1",
     "vue-tsc": "^0.34.7"
-  },
-  "eslintConfig": {
-    "parser": "babel-eslint"
   }
+
 }
