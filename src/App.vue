@@ -1,7 +1,6 @@
 <template>
     <el-config-provider :locale="locale">
-        <!-- <router-view /> -->
-        <el-button>aaa</el-button>
+        <router-view />
     </el-config-provider>
 </template>
 <script setup lang="ts">

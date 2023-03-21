@@ -1,15 +1,29 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import type { App } from 'vue';
+// 首页地址（默认）
+const HOME_URL = '/home/index';
+const layout = import(/*webpackChunkName:layout*/ '@/layouts/index.vue');
 const routes: Array<RouteRecordRaw> = [
     {
-        path: '/login',
-        name: 'Login',
-        meta: {
-            title: '登录',
-            keepAlive: true,
-            requireAuth: false
-        },
-        component: () => import('@/views/login/index.vue')
+        path: '/',
+        redirect: HOME_URL
+    },
+    {
+        path: '/layout',
+        name: 'layout',
+        component: () => layout,
+        redirect: HOME_URL,
+        children: [
+            {
+                path: HOME_URL,
+                name: 'home',
+                component: () => import(/*webpackChunkName:home*/ '@/views/home/index.vue'),
+                meta: {
+                    title: '首页',
+                    icon: 'dashboard'
+                }
+            }
+        ]
     }
 ];
 
