@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
 import type { App } from 'vue';
 // 首页地址（默认）
 const HOME_URL = '/home/index';
@@ -21,6 +21,29 @@ const routes: Array<RouteRecordRaw> = [
                 meta: {
                     title: '首页',
                     icon: 'dashboard'
+                }
+            }
+        ]
+    },
+    {
+        path: '/proTable',
+        name: 'proTable',
+        component: () => layout,
+        redirect: '/proTable/useProTable',
+        children: [
+            {
+                path: '/proTable/useProTable',
+                name: 'useProTable',
+                component: () =>
+                    import(/*webpackChunkName:useProTable*/ '@/views/proTable/index.vue'),
+                meta: {
+                    icon: 'Menu',
+                    title: '使用 ProTable',
+                    isLink: '',
+                    isHide: false,
+                    isFull: false,
+                    isAffix: false,
+                    isKeepAlive: true
                 }
             }
         ]

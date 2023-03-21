@@ -2,11 +2,11 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import { setupRouter } from './router';
 const app = createApp(App);
-import { setupAssets } from '@/plugins/assets';
+import { setupAssets, setupElement } from '@/plugins';
 
 function setupPlugins() {
     // 注册全局常用的UI组件
-    // setupAntd(app);
+    setupElement(app);
     // 引入静态资源
     setupAssets();
     // 注册全局自定义组件
