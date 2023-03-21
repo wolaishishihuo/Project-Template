@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
 import type { App } from 'vue';
 // 首页地址（默认）
-const HOME_URL = '/home/index';
+const HOME_URL = '/home';
 const layout = import(/*webpackChunkName:layout*/ '@/layouts/index.vue');
 const routes: Array<RouteRecordRaw> = [
     {
@@ -9,13 +9,13 @@ const routes: Array<RouteRecordRaw> = [
         redirect: HOME_URL
     },
     {
-        path: '/layout',
-        name: 'layout',
+        path: '/home',
+        name: 'home',
         component: () => layout,
         redirect: HOME_URL,
         children: [
             {
-                path: HOME_URL,
+                path: '/home',
                 name: 'home',
                 component: () => import(/*webpackChunkName:home*/ '@/views/home/index.vue'),
                 meta: {
@@ -29,11 +29,10 @@ const routes: Array<RouteRecordRaw> = [
         path: '/proTable',
         name: 'proTable',
         component: () => layout,
-        redirect: '/proTable/useProTable',
         children: [
             {
                 path: '/proTable/useProTable',
-                name: 'useProTable',
+                name: 'useProTable2',
                 component: () =>
                     import(/*webpackChunkName:useProTable*/ '@/views/proTable/index.vue'),
                 meta: {

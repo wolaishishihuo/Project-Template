@@ -2,7 +2,7 @@
 	"code": 200,
 	"data": [
 		{
-			"path": "/home/index",
+			"path": "/home",
 			"name": "home",
 			"component": "/home/index",
 			"meta": {
@@ -31,8 +31,8 @@
 		},
 		{
 			"path": "/proTable",
-			"name": "proTable",
-			"redirect": "/proTable/useProTable",
+            "name": "useProTable",
+            "redirect": "/proTable/useProTable",
 			"meta": {
 				"icon": "MessageBox",
 				"title": "表格封装",
@@ -42,14 +42,14 @@
 				"isAffix": false,
 				"isKeepAlive": true
 			},
-			"children": [
-				{
+            "children":[
+                {
 					"path": "/proTable/useProTable",
 					"name": "useProTable",
-					"component": "/proTable/useProTable",
+					"component": "/proTable/index",
 					"meta": {
 						"icon": "Menu",
-						"title": "使用 ProTable",
+						"title": "使用表格",
 						"isLink": "",
 						"isHide": false,
 						"isFull": false,
@@ -57,7 +57,8 @@
 						"isKeepAlive": true
 					}
 				}
-			]
+                
+            ]
 		},
 		{
 			"path": "/auth",
