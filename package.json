@@ -12,6 +12,9 @@
     "dayjs": "^1.11.7",
     "element-plus": "^2.3.1",
     "nprogress": "^0.2.0",
+    "pinia": "^2.0.33",
+    "pinia-persistedstate-plugin": "^0.1.0",
+    "pinia-plugin-persistedstate": "^3.1.0",
     "vue": "^3.2.25",
     "vue-router": "^4.1.6"
   },

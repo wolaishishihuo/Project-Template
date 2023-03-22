@@ -1,9 +1,9 @@
 <template>
     <!-- 经典布局 -->
-    <el-container>
+    <el-container class="layout">
         <el-aside>
-            <div class="menu">
-                <div class="logo" :style="{ width: isCollapse ? '65px' : '210px' }">
+            <div class="menu" :style="{ width: isCollapse ? '65px' : '210px' }">
+                <div class="logo">
                     <img src="@/assets/images/logo.svg" alt="logo" />
                     <span v-show="!isCollapse">Jname Admin</span>
                 </div>
@@ -18,24 +18,30 @@
                         text-color="#bdbdc0"
                         active-text-color="#ffffff"
                     >
-                        <SubMenu :menu-list="menuList" />
+                        <SubMenu :menuList="menuList" />
                     </el-menu>
                 </el-scrollbar>
             </div>
         </el-aside>
         <el-container>
-            <el-header>Header</el-header>
+            <el-header>
+                <ToolBarLeft />
+                <!-- <ToolBarRight /> -->
+            </el-header>
             <Main />
         </el-container>
     </el-container>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 import SubMenu from '../components/menu/index.vue';
 import Main from '../components/main/index.vue';
+import ToolBarLeft from '../components/header/ToolBarLeft.vue';
 import DynamicRouter from '@/assets/json/dynamicRouter.json';
+import { useGlobalStore } from '@/store/global';
+const globalStore = useGlobalStore();
 
 const route = useRoute();
 // 获取菜单列表;
@@ -45,8 +51,10 @@ const getAuthMenuListApi = () => {
 const activeMenu = computed<any>(() =>
     route.meta.activeMenu ? route.meta.activeMenu : route.path
 );
+const isCollapse = computed<boolean>(() => {
+    return globalStore.themeConfig.isCollapse;
+});
 
-const isCollapse = ref(false);
 const menuList = getAuthMenuListApi().data;
 </script>
 <style scoped lang="less">

@@ -3,7 +3,7 @@ import App from './App.vue';
 import { setupRouter } from './router';
 const app = createApp(App);
 import { setupAssets, setupElement } from '@/plugins';
-
+import { setupStore } from '@/store';
 function setupPlugins() {
     // 注册全局常用的UI组件
     setupElement(app);
@@ -17,8 +17,8 @@ function setupPlugins() {
     // setupGlobalMethods(app);
 }
 async function setupApp() {
-    // 挂载vuex状态管理
-    // setupStore(app);
+    // 挂载pinia状态管理
+    setupStore(app);
     // 挂载路由
     await setupRouter(app);
 
