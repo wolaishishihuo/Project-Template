@@ -5,7 +5,7 @@ import eslintPlugin from 'vite-plugin-eslint';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
-
+import setupExtend from 'vite-plugin-vue-setup-extend';
 // https://vitejs.dev/config/
 const path = require('path');
 const resolve = (dir: string) => path.resolve(__dirname, dir);
@@ -47,6 +47,7 @@ export default (configEnv: ConfigEnv): UserConfigExport => {
         },
         plugins: [
             vue(),
+            setupExtend(),
             // 增加下面的配置项,这样在运行时就能检查eslint规范
             eslintPlugin({
                 include: [

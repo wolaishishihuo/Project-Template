@@ -9,6 +9,9 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    403: typeof import('./../src/components/ErrorMessage/403.vue')['default']
+    404: typeof import('./../src/components/ErrorMessage/404.vue')['default']
+    500: typeof import('./../src/components/ErrorMessage/500.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
