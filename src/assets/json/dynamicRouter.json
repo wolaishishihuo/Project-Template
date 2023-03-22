@@ -30,12 +30,12 @@
 			}
 		},
 		{
-			"path": "/proTable",
-            "name": "useProTable",
-            "redirect": "/proTable/useProTable",
+			"path": "/example",
+            "name": "example",
+            "redirect": "/example/useProTable",
 			"meta": {
 				"icon": "MessageBox",
-				"title": "表格封装",
+				"title": "模板示例",
 				"isLink": "",
 				"isHide": false,
 				"isFull": false,
@@ -44,9 +44,9 @@
 			},
             "children":[
                 {
-					"path": "/proTable/useProTable",
+					"path": "/example/useProTable",
 					"name": "useProTable",
-					"component": "/proTable/index",
+					"component": "/example/useProTable/index",
 					"meta": {
 						"icon": "Menu",
 						"title": "使用表格",

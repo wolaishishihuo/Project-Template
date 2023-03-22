@@ -26,15 +26,17 @@ export const staticRoutes: Array<RouteRecordRaw> = [
         ]
     },
     {
-        path: '/proTable',
-        name: 'proTable',
+        path: '/example',
+        name: 'example',
         component: () => layout,
         children: [
             {
-                path: '/proTable/useProTable',
-                name: 'useProTable2',
+                path: '/example/useProTable',
+                name: 'useProTable',
                 component: () =>
-                    import(/*webpackChunkName:useProTable*/ '@/views/proTable/index.vue'),
+                    import(
+                        /*webpackChunkName:useProTable*/ '@/views/example/useProTable/index.vue'
+                    ),
                 meta: {
                     icon: 'Menu',
                     title: '使用 ProTable',
