@@ -1,10 +1,10 @@
 name: Deploy
- 
+
 on:
   push:
     branches:
       - main
- 
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -13,14 +13,14 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: npm
-      - run: npm install --frozen-lockfile
- 
+          cache: yarn
+      - run: yarn install --frozen-lockfile
+
       - name: Build
-        run: npm docs:build
- 
+        run: yarn docs:build
+
       - name: Deploy
-        uses: peaceiris/actions-template-pages@v3
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs/.vitepress/dist
