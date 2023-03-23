@@ -21,7 +21,7 @@
 			"component": "/dataScreen/index",
 			"meta": {
 				"icon": "View",
-				"title": "数据大屏",
+				"title": "数据大屏1",
 				"isLink": "",
 				"isHide": false,
 				"isFull": true,
