@@ -4,7 +4,7 @@
     </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts" name="home"></script>
 
 <style scoped lang="less">
 @import './index.less';

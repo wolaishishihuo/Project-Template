@@ -1,7 +1,7 @@
 <template>
     <div :class="['breadcrumb-box']">
         <el-breadcrumb separator="/">
-            <transition-group name="breadcrumb">
+            <transition-group appear name="breadcrumb">
                 <el-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="item.path">
                     <div
                         class="el-breadcrumb__inner is-link"
