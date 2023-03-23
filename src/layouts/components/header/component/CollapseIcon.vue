@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { useGlobalStore } from '@/store/global';
+import { useGlobalStore } from '@/store/module/global';
 
 const globalStore = useGlobalStore();
 const themeConfig = computed(() => globalStore.themeConfig);

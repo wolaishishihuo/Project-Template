@@ -26,6 +26,7 @@
         <el-container>
             <el-header>
                 <ToolBarLeft />
+                <div></div>
                 <!-- <ToolBarRight /> -->
             </el-header>
             <Main />
@@ -39,23 +40,23 @@ import { useRoute } from 'vue-router';
 import SubMenu from '../components/menu/index.vue';
 import Main from '../components/main/index.vue';
 import ToolBarLeft from '../components/header/ToolBarLeft.vue';
-import DynamicRouter from '@/assets/json/dynamicRouter.json';
-import { useGlobalStore } from '@/store/global';
+import { useGlobalStore } from '@/store/module/global';
+import { useAuthStore } from '@/store/module/auth';
 const globalStore = useGlobalStore();
+const authStore = useAuthStore();
+// 没有login页面 所以这里获取菜单
+authStore.getAuthMenuList();
 
 const route = useRoute();
-// 获取菜单列表;
-const getAuthMenuListApi = () => {
-    return DynamicRouter;
-};
 const activeMenu = computed<any>(() =>
     route.meta.activeMenu ? route.meta.activeMenu : route.path
 );
 const isCollapse = computed<boolean>(() => {
     return globalStore.themeConfig.isCollapse;
 });
-
-const menuList = getAuthMenuListApi().data;
+const menuList = computed(() => {
+    return authStore.showMenuListGet;
+});
 </script>
 <style scoped lang="less">
 @import './index.less';
