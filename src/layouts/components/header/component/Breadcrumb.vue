@@ -27,8 +27,6 @@ import { HOME_URL } from '@/config/config';
 const route = useRoute();
 const router = useRouter();
 const authStore = useAuthStore();
-console.log(route.matched);
-
 const breadcrumbList = computed(() => {
     let breadcrumbData =
         authStore.breadcrumbListGet[route.matched[route.matched.length - 1].path] ?? [];

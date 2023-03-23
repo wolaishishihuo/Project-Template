@@ -1,8 +1,11 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import type { App } from 'vue';
-import { staticRoutes, errorRouters } from './staticRoutes';
+import { staticRouter, errorRouter } from './module/staticRoutes';
 import { LOGIN_URL, ROUTER_WHITE_LIST } from '@/config/config';
 import NProgress from '@/plugins/nprogress';
+import { useAuthStore } from '@/store/module/auth';
+import { useGlobalStore } from '@/store/module/global';
+import { initDynamicRouter } from './module/asyncRoutes';
 
 /**
  * @description 动态路由参数配置简介 📚
@@ -23,7 +26,7 @@ import NProgress from '@/plugins/nprogress';
 
 const router = createRouter({
     history: createWebHashHistory(),
-    routes: [...staticRoutes, ...errorRouters],
+    routes: [...staticRouter, ...errorRouter],
     strict: false,
     scrollBehavior: () => ({ left: 0, top: 0 })
 });
@@ -31,29 +34,34 @@ const router = createRouter({
 /**
  * @description 路由拦截 beforeEach
  * */
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
+    const authStore = useAuthStore();
+    const globalStore = useGlobalStore();
     // 1.NProgress 开始
     NProgress.start();
+
     // 2.动态设置标题
     const title = import.meta.env.VITE_GLOB_APP_TITLE;
     document.title = to.meta.title ? `${to.meta.title} - ${title}` : title;
+
     // 3.判断是访问登陆页，有 Token 就在当前页面，没有 Token 重置路由并放行到登陆页
     if (to.path.toLocaleLowerCase() === LOGIN_URL) {
-        // if (globalStore.token) return next(from.fullPath);
-        // resetRouter();
-        // return next();
+        if (globalStore.token) return next(from.fullPath);
+        resetRouter();
+        return next();
     }
     // 4.判断访问页面是否在路由白名单地址中，如果存在直接放行
     if (ROUTER_WHITE_LIST.includes(to.path)) return next();
+
     // 5.判断是否有 Token，没有重定向到 login
-    // if (!globalStore.token) return next({ path: LOGIN_URL, replace: true });
+    if (!globalStore.token) return next({ path: LOGIN_URL, replace: true });
+
     // 6.如果没有菜单列表，就重新请求菜单列表并添加动态路由
-    // const authStore = AuthStore();
-    // authStore.setRouteName(to.name as string);
-    // if (!authStore.authMenuListGet.length) {
-    //     await initDynamicRouter();
-    //     return next({ ...to, replace: true });
-    // }
+    authStore.setRouteName(to.name as string);
+    if (!authStore.authMenuListGet.length) {
+        await initDynamicRouter();
+        return next({ ...to, replace: true });
+    }
     // 7.正常访问页面
     next();
 });
@@ -62,11 +70,11 @@ router.beforeEach((to, from, next) => {
  * @description 重置路由
  * */
 export const resetRouter = () => {
-    // const authStore = AuthStore();
-    // authStore.flatMenuListGet.forEach(route => {
-    //     const { name } = route;
-    //     if (name && router.hasRoute(name)) router.removeRoute(name);
-    // });
+    const authStore = useAuthStore();
+    authStore.flatMenuListGet.forEach(route => {
+        const { name } = route;
+        if (name && router.hasRoute(name)) router.removeRoute(name);
+    });
 };
 
 /**
@@ -90,3 +98,4 @@ export async function setupRouter(app: App) {
     // 路由准备就绪后挂载APP实例
     await router.isReady();
 }
+export default router;

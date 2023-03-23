@@ -6,7 +6,7 @@ export const useGlobalStore = defineStore('global', {
     // 其它配置项
     state: () => {
         return {
-            token: '',
+            token: '112211',
             userInfo: '',
             themeConfig: {
                 // 折叠菜单
@@ -18,6 +18,9 @@ export const useGlobalStore = defineStore('global', {
     actions: {
         setThemeConfig(themeConfig: ThemeConfigProps) {
             this.themeConfig = themeConfig;
+        },
+        setToken(token: string) {
+            this.token = token;
         }
     },
     persist: piniaPersistConfig('GlobalState')

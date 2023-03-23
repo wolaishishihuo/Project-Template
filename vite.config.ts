@@ -18,7 +18,7 @@ export default (configEnv: ConfigEnv): UserConfigExport => {
         publicDir: resolve('public'), // 静态资源路径
         // 处理@
         resolve: {
-            alias: { '@': path.resolve(__dirname, 'src') }
+            alias: { '@': resolve('./src') }
         },
         // 编译
         build: {
