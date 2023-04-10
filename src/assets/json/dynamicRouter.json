@@ -56,6 +56,20 @@
 						"isAffix": false,
 						"isKeepAlive": true
 					}
+				},
+                {
+					"path": "/example/useDynamicForm",
+					"name": "useProTable",
+					"component": "/example/useDynamicForm/index",
+					"meta": {
+						"icon": "Menu",
+						"title": "使用表单",
+						"isLink": "",
+						"isHide": false,
+						"isFull": false,
+						"isAffix": false,
+						"isKeepAlive": true
+					}
 				}
                 
             ]
@@ -237,36 +251,6 @@
 					"meta": {
 						"icon": "Menu",
 						"title": "拖拽组件",
-						"isLink": "",
-						"isHide": false,
-						"isFull": false,
-						"isAffix": false,
-						"isKeepAlive": true
-					}
-				}
-			]
-		},
-		{
-			"path": "/form",
-			"name": "form",
-			"redirect": "/form/proForm",
-			"meta": {
-				"icon": "Tickets",
-				"title": "表单 Form",
-				"isLink": "",
-				"isHide": false,
-				"isFull": false,
-				"isAffix": false,
-				"isKeepAlive": true
-			},
-			"children": [
-				{
-					"path": "/form/dynamicForm",
-					"name": "dynamicForm",
-					"component": "/form/dynamicForm/index",
-					"meta": {
-						"icon": "Menu",
-						"title": "动态 Form",
 						"isLink": "",
 						"isHide": false,
 						"isFull": false,

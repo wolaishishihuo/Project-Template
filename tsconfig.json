@@ -18,7 +18,7 @@
         "lib": ["esnext", "dom"],
         "skipLibCheck": true,
         "outDir": "./dist", // 指定输出目录
-        "baseUrl": ".",
+        "baseUrl": "./",
         "paths": {
             "@/*": ["src/*"]
         },
