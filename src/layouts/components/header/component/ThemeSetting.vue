@@ -1,11 +1,5 @@
 <template>
     <div class="theme-setting">
-        <!-- <svg-icon
-            class="toolBar-icon"
-            @click="openDrawer"
-            name="setting"
-            :iconStyle="{ width: '20px', height: '20px' }"
-        /> -->
         <i class="iconfont icon-shezhi toolBar-icon" @click="openDrawer"></i>
     </div>
 </template>

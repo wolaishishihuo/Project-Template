@@ -6,22 +6,6 @@
             布局切换
         </el-divider>
         <div class="layout-box">
-            <!-- <el-tooltip effect="dark" content="纵向" placement="top" :show-after="200">
-                <div
-                    :class="[
-                        'layout-item layout-vertical',
-                        themeConfig.layout == 'vertical' ? 'is-active' : ''
-                    ]"
-                    @click="changeLayout('vertical')"
-                >
-                    <div class="layout-dark"></div>
-                    <div class="layout-container">
-                        <div class="layout-light"></div>
-                        <div class="layout-content"></div>
-                    </div>
-                    <el-icon v-if="themeConfig.layout == 'vertical'"><CircleCheckFilled /></el-icon>
-                </div>
-            </el-tooltip> -->
             <el-tooltip effect="dark" content="经典" placement="top" :show-after="200">
                 <div
                     :class="[
@@ -53,20 +37,6 @@
                     /></el-icon>
                 </div>
             </el-tooltip>
-            <!-- <el-tooltip effect="dark" content="分栏" placement="top" :show-after="200">
-                <div
-                    :class="[
-                        'layout-item layout-columns',
-                        themeConfig.layout == 'columns' ? 'is-active' : ''
-                    ]"
-                    @click="changeLayout('columns')"
-                >
-                    <div class="layout-dark"></div>
-                    <div class="layout-light"></div>
-                    <div class="layout-content"></div>
-                    <el-icon v-if="themeConfig.layout == 'columns'"><CircleCheckFilled /></el-icon>
-                </div>
-            </el-tooltip> -->
         </div>
         <br />
 
@@ -96,7 +66,6 @@
             <el-switch v-model="themeConfig.isWeak" @change="changeGreyOrWeak($event, 'weak')" />
         </div> -->
         <br />
-
         <!-- 界面设置 -->
         <el-divider class="divider" content-position="center">
             <el-icon><Setting /></el-icon>
