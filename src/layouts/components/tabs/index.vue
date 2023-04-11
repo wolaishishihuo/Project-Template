@@ -90,8 +90,6 @@ const initTabs = () => {
                 name: item.name,
                 close: !item.meta.isAffix
             };
-            console.log(tabsParams);
-
             tabStore.addTabs(tabsParams);
         }
     });
