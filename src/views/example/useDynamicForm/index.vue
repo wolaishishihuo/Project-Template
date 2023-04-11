@@ -49,8 +49,7 @@ const formItems = [
     }
 ];
 const formData = ref({
-    id: '',
-    age: '1'
+    id: ''
 });
 const validatePass2 = (rule: any, value: any, callback: any) => {
     if (value === '') {
