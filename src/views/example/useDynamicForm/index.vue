@@ -1,6 +1,6 @@
 <template>
     <div class="dynamicForm">
-        <h1>自定义封装 Form表单</h1>
+        <h1 class="title">自定义封装 Form表单</h1>
         <dynamicForm
             v-model="formData"
             :form-items="formItems"
@@ -73,4 +73,8 @@ watch(
     }
 );
 </script>
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.title {
+    color: var(--light-ft-color);
+}
+</style>

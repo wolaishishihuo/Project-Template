@@ -14,6 +14,7 @@ const openDrawer = () => {
 .theme-setting {
     height: 20px;
     .toolBar-icon {
+        color: var(--light-ft-color);
         font-size: 20px;
         cursor: pointer;
     }

@@ -45,7 +45,7 @@
             <el-icon><ColdDrink /></el-icon>
             全局主题
         </el-divider>
-        <!-- <div class="theme-item">
+        <div class="theme-item">
             <span>主题颜色</span>
             <el-color-picker
                 v-model="themeConfig.primary"
@@ -59,12 +59,18 @@
         </div>
         <div class="theme-item">
             <span>灰色模式</span>
-            <el-switch v-model="themeConfig.isGrey" @change="changeGreyOrWeak($event, 'grey')" />
+            <el-switch
+                v-model="themeConfig.isGrey"
+                @change="changeGreyOrWeak($event as boolean, 'grey')"
+            />
         </div>
         <div class="theme-item">
             <span>色弱模式</span>
-            <el-switch v-model="themeConfig.isWeak" @change="changeGreyOrWeak($event, 'weak')" />
-        </div> -->
+            <el-switch
+                v-model="themeConfig.isWeak"
+                @change="changeGreyOrWeak($event as boolean, 'weak')"
+            />
+        </div>
         <br />
         <!-- 界面设置 -->
         <el-divider class="divider" content-position="center">
@@ -100,14 +106,14 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
-// import { useTheme } from '@/hooks/useTheme';
+import { useTheme } from '@/hooks/useTheme';
 import { useGlobalStore } from '@/store/module/global';
 import { LayoutType } from '@/store/interface';
 import { DEFAULT_PRIMARY } from '@/config/config';
-// import SwitchDark from '@/components/SwitchDark/index.vue';
+import SwitchDark from '../switchDark/index.vue';
 import mittBus from '@/utils/mittBus';
 
-// const { changePrimary, changeGreyOrWeak } = useTheme();
+const { changePrimary, changeGreyOrWeak } = useTheme();
 
 // 预定义主题颜色
 const colorList = [

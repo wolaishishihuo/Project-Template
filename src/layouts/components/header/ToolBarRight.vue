@@ -37,6 +37,7 @@ import Avatar from './components/Avatar.vue';
         }
     }
     .username {
+        color: var(--light-ft-color);
         margin: 0 20px;
         font-size: 15px;
     }
