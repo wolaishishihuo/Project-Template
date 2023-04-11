@@ -26,8 +26,7 @@
         <el-container>
             <el-header>
                 <ToolBarLeft />
-                <div></div>
-                <!-- <ToolBarRight /> -->
+                <ToolBarRight />
             </el-header>
             <Main />
         </el-container>
@@ -40,6 +39,7 @@ import { useRoute } from 'vue-router';
 import SubMenu from '../components/menu/index.vue';
 import Main from '../components/main/index.vue';
 import ToolBarLeft from '../components/header/ToolBarLeft.vue';
+import ToolBarRight from '../components/header/ToolBarRight.vue';
 import { useGlobalStore } from '@/store/module/global';
 import { useAuthStore } from '@/store/module/auth';
 const globalStore = useGlobalStore();

@@ -12,11 +12,13 @@
     "dayjs": "^1.11.7",
     "element-plus": "^2.3.1",
     "lodash-es": "^4.17.21",
+    "mitt": "^3.0.0",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.33",
     "pinia-persistedstate-plugin": "^0.1.0",
     "pinia-plugin-persistedstate": "^3.1.0",
     "sortablejs": "^1.15.0",
+    "vite-plugin-svg-icons": "^2.0.1",
     "vue": "^3.2.25",
     "vue-router": "^4.1.6"
   },

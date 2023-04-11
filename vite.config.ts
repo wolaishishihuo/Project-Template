@@ -6,6 +6,8 @@ import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import setupExtend from 'vite-plugin-vue-setup-extend';
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
+
 // https://vitejs.dev/config/
 const path = require('path');
 const resolve = (dir: string) => path.resolve(__dirname, dir);
@@ -74,6 +76,12 @@ export default (configEnv: ConfigEnv): UserConfigExport => {
             Components({
                 resolvers: [ElementPlusResolver()],
                 dts: 'types/components.d.ts'
+            }),
+            createSvgIconsPlugin({
+                // 指定需要缓存的图标文件夹
+                iconDirs: [path.resolve(process.cwd(), 'src/assets/icons')],
+                // 指定symbolId格式
+                symbolId: 'icon-[dir]-[name]'
             })
         ]
     };
