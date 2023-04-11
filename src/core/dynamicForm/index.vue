@@ -7,10 +7,11 @@
                         :label="item.label"
                         :style="itemStyle"
                         :prop="item.field"
-                        v-if="!item.hide"
+                        v-if="!item.props || item.props?.hide"
                     >
                         <template v-if="item.type === 'input' || item.type === 'password'">
                             <el-input
+                                :disabled="item.props?.disabled"
                                 :placeholder="item.placeholder"
                                 :show-password="item.type === 'password'"
                                 v-model="formData[`${item.field}`]"
@@ -18,6 +19,7 @@
                         </template>
                         <template v-else-if="item.type === 'select'">
                             <el-select
+                                :disabled="item.props?.disabled"
                                 :placeholder="item.placeholder"
                                 style="width: 100%"
                                 v-model="formData[`${item.field}`]"
@@ -31,12 +33,6 @@
                                 </el-option>
                             </el-select>
                         </template>
-                        <template v-else-if="item.type === 'datepicker'">
-                            <el-date-picker
-                                v-bind="item.otherOptions"
-                                v-model="formData[`${item.field}`]"
-                            />
-                        </template>
                     </el-form-item>
                 </el-col>
             </template>
@@ -48,13 +44,15 @@
 import { ref, toRefs, watch } from 'vue';
 import type { FormInstance, FormRules } from 'element-plus';
 import { _cloneDeep } from '@/utils/common';
+import type { FormItem } from './interface';
+import { parseAllExpression } from './index';
 const props = withDefaults(
     defineProps<{
         labelWidth: string;
         modelValue: Record<string, any>;
         colLayout: Record<string, any>;
         itemStyle: Record<string, any>;
-        formItems: any[];
+        formItems: FormItem[];
         rules: FormRules;
     }>(),
     {
@@ -75,40 +73,11 @@ const { modelValue, labelWidth, formItems } = toRefs(props);
 const formRef = ref<FormInstance>();
 const formData = ref({ ...modelValue.value });
 
-const isExpression = (str: string) => {
-    if (typeof str !== 'string') {
-        return false;
-    }
-    const pattern = /^{\s*{(.+)}\s*}$/;
-    const reg1 = /^{\s*{function\(.+}\s*}$/;
-    return str.match(pattern) && !str.match(reg1);
-};
-
-const parseExpression = (func: any, formData = {}) => {
-    if (typeof func === 'string') {
-        const funcBody = func.replace(/^{\s*{/g, '').replace(/}\s*}$/g, '');
-        const funcStr = `
-      return ${funcBody.replace(/formData/g, JSON.stringify(formData))}
-    `;
-        try {
-            const result = Function(funcStr)();
-            return result;
-        } catch (error) {
-            console.log(error, func);
-            return null; // 如果计算有错误，return null 最合适
-        }
-    }
-};
 const dynamicFormItems = ref();
 const init = () => {
     dynamicFormItems.value = _cloneDeep(formItems.value);
-    dynamicFormItems.value.forEach(schema => {
-        Object.keys(schema).forEach(key => {
-            const value = schema[key];
-            if (isExpression(value)) {
-                schema[key] = !parseExpression(value, formData.value);
-            }
-        });
+    dynamicFormItems.value.forEach((schema: FormItem) => {
+        Object.assign(schema, parseAllExpression(schema, formData.value));
     });
 };
 init();

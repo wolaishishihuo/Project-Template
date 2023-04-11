@@ -42,7 +42,10 @@ const formItems = [
         type: 'input',
         placeholder: '测试组件',
         label: 'a',
-        hide: '{{formData.id == 2 && formData.age == 2}}'
+        props: {
+            hide: '{{formData.id == 2 }}',
+            disabled: '{{formData.age == 2 }}'
+        }
     }
 ];
 const formData = ref({
