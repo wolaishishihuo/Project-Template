@@ -6,6 +6,7 @@
             name="setting"
             :iconStyle="{ width: '20px', height: '20px' }"
         />
+        <i class="iconfont icon-zhuanchezhuanyongbeifen"></i>
     </div>
 </template>
 
