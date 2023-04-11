@@ -491,6 +491,19 @@
 					}
 				}
 			]
+		},
+        {
+			"path": "/link",
+			"name": "link",
+			"meta": {
+				"icon": "Paperclip",
+				"title": "GitHub 仓库",
+				"isLink": "https://github.com/wolaishishihuo/Project-Template/tree/main",
+				"isHide": false,
+				"isFull": false,
+				"isAffix": false,
+				"isKeepAlive": true
+			}
 		}
 	],
 	"msg": "成功"
