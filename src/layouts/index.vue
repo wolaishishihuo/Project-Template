@@ -1,13 +1,20 @@
 <template>
-    <component :is="LayoutComponents['classic']" />
+    <component :is="LayoutComponents[themeConfig.layout]" />
     <ThemeDrawer />
 </template>
 
 <script setup lang="ts">
+import { computed, type Component } from 'vue';
 import layoutClassic from '@/layouts/LayoutClassic/index.vue';
+import layoutTransverse from '@/layouts/LayoutTransverse/index.vue';
 import ThemeDrawer from '@/layouts/components/themeDrawer/index.vue';
-const LayoutComponents = {
-    classic: layoutClassic
+import { useGlobalStore } from '@/store/module/global';
+
+const LayoutComponents: { [key: string]: Component } = {
+    classic: layoutClassic,
+    transverse: layoutTransverse
 };
+const globalStore = useGlobalStore();
+const themeConfig = computed(() => globalStore.themeConfig);
 </script>
 <style scoped lang="less"></style>

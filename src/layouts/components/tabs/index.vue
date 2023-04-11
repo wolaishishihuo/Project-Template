@@ -15,7 +15,7 @@
                     :closable="item.close"
                 >
                     <template #label>
-                        <el-icon class="tabs-icon" v-show="item.icon">
+                        <el-icon class="tabs-icon" v-show="item.icon && themeConfig.tabsIcon">
                             <component :is="item.icon" />
                         </el-icon>
                         {{ item.title }}
@@ -35,7 +35,9 @@ import { useTabStore } from '@/store/module/tabs';
 import { useAuthStore } from '@/store/module/auth';
 import MoreButton from './MoreButton.vue';
 import { TabsPaneContext, TabPaneName } from 'element-plus';
-
+import { useGlobalStore } from '@/store/module/global';
+const globalStore = useGlobalStore();
+const themeConfig = computed(() => globalStore.themeConfig);
 const route = useRoute();
 const router = useRouter();
 const tabStore = useTabStore();
