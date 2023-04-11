@@ -27,10 +27,9 @@
                                 <el-option
                                     v-for="option in item.options"
                                     :key="option.value"
+                                    :label="option.label"
                                     :value="option.value"
-                                >
-                                    {{ option.label }}
-                                </el-option>
+                                />
                             </el-select>
                         </template>
                     </el-form-item>

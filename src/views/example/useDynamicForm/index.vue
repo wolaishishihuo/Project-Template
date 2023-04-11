@@ -18,13 +18,13 @@ const formItems = [
     {
         field: 'id',
         type: 'input',
-        placeholder: '测试组件',
+        placeholder: '测试组件:输入2',
         label: 'id'
     },
     {
         field: 'age',
         type: 'select',
-        placeholder: '测试组件1',
+        placeholder: '测试组件:选择30',
         label: 'age',
         options: [
             {
@@ -49,7 +49,8 @@ const formItems = [
     }
 ];
 const formData = ref({
-    id: ''
+    id: '',
+    age: '1'
 });
 const validatePass2 = (rule: any, value: any, callback: any) => {
     if (value === '') {
