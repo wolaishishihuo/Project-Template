@@ -1,16 +1,16 @@
 {
-  "id": "4008496",
-  "name": "jname-admin",
+  "id": "4009333",
+  "name": "no name",
   "font_family": "iconfont",
   "css_prefix_text": "icon-",
   "description": "",
   "glyphs": [
     {
-      "icon_id": "21497139",
+      "icon_id": "5057268",
       "name": "设置",
-      "font_class": "zhuanchezhuanyongbeifen",
-      "unicode": "e604",
-      "unicode_decimal": 58884
+      "font_class": "shezhi",
+      "unicode": "e610",
+      "unicode_decimal": 58896
     }
   ]
 }

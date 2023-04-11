@@ -1,12 +1,12 @@
 <template>
     <div class="theme-setting">
-        <svg-icon
+        <!-- <svg-icon
             class="toolBar-icon"
             @click="openDrawer"
             name="setting"
             :iconStyle="{ width: '20px', height: '20px' }"
-        />
-        <i class="iconfont icon-zhuanchezhuanyongbeifen"></i>
+        /> -->
+        <i class="iconfont icon-shezhi toolBar-icon" @click="openDrawer"></i>
     </div>
 </template>
 
@@ -20,6 +20,7 @@ const openDrawer = () => {
 .theme-setting {
     height: 20px;
     .toolBar-icon {
+        font-size: 20px;
         cursor: pointer;
     }
 }
