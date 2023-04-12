@@ -1,16 +1,37 @@
 {
-  "id": "4009333",
-  "name": "no name",
+  "id": "4008496",
+  "name": "jname-admin",
   "font_family": "iconfont",
   "css_prefix_text": "icon-",
   "description": "",
   "glyphs": [
     {
-      "icon_id": "5057268",
+      "icon_id": "7791023",
       "name": "设置",
       "font_class": "shezhi",
-      "unicode": "e610",
-      "unicode_decimal": 58896
+      "unicode": "e7ef",
+      "unicode_decimal": 59375
+    },
+    {
+      "icon_id": "4777232",
+      "name": "全屏",
+      "font_class": "quanping",
+      "unicode": "ec13",
+      "unicode_decimal": 60435
+    },
+    {
+      "icon_id": "5387604",
+      "name": "取消全屏",
+      "font_class": "quxiaoquanping",
+      "unicode": "eb10",
+      "unicode_decimal": 60176
+    },
+    {
+      "icon_id": "8765149",
+      "name": "皮肤",
+      "font_class": "pifu",
+      "unicode": "e62b",
+      "unicode_decimal": 58923
     }
   ]
 }
