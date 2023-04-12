@@ -10,13 +10,3 @@ const openDrawer = () => {
     mittBus.emit('openThemeDrawer');
 };
 </script>
-<style lang="less" scoped>
-.theme-setting {
-    height: 20px;
-    .toolBar-icon {
-        color: var(--light-ft-color);
-        font-size: 20px;
-        cursor: pointer;
-    }
-}
-</style>
