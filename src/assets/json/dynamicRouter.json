@@ -59,7 +59,7 @@
 				},
                 {
 					"path": "/example/useDynamicForm",
-					"name": "useProTable",
+					"name": "useDynamicForm",
 					"component": "/example/useDynamicForm/index",
 					"meta": {
 						"icon": "Menu",

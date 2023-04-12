@@ -1,25 +1,21 @@
 <template>
     <div class="tool-bar-ri">
         <div class="header-icon">
-            <!-- <AssemblySize id="assemblySize" />
-            <Language id="language" />
-            <SearchMenu id="searchMenu" /> -->
+            <AssemblySize id="assemblySize" />
+            <SearchMenu id="searchMenu" />
             <ThemeSetting id="themeSetting" />
             <Fullscreen id="fullscreen" />
-            <!-- <Message id="message" /> -->
         </div>
         <span class="username">贾志刚</span>
-        <!-- <Avatar /> -->
+        <Avatar />
     </div>
 </template>
 
 <script setup lang="ts">
-import SearchMenu from './components/SearchMenu.vue';
-import Message from './components/Message.vue';
-import Language from './components/Language.vue';
+import SearchMenu from './component/SearchMenu.vue';
 import ThemeSetting from './component/ThemeSetting.vue';
-import AssemblySize from './components/AssemblySize.vue';
-import Avatar from './components/Avatar.vue';
+import AssemblySize from './component/AssemblySize.vue';
+import Avatar from './component/Avatar.vue';
 import Fullscreen from './component/FullScreen.vue';
 </script>
 

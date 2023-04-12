@@ -1,6 +1,6 @@
 <template>
     <div class="theme-setting">
-        <i class="iconfont icon-shezhi toolBar-icon" @click="openDrawer"></i>
+        <i class="iconfont icon-pifu toolBar-icon" @click="openDrawer"></i>
     </div>
 </template>
 

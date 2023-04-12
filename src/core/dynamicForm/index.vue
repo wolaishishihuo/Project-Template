@@ -40,11 +40,14 @@
 </template>
 
 <script lang="ts" setup name="dynamicForm">
-import { ref, toRefs, watch } from 'vue';
+import { ref, toRefs, watch, computed } from 'vue';
 import type { FormInstance, FormRules } from 'element-plus';
 import { _cloneDeep } from '@/utils/common';
 import type { FormItem } from './interface';
 import { parseAllExpression } from './index';
+import { useGlobalStore } from '@/store/module/global';
+const globalStore = useGlobalStore();
+const assemblySize = computed(() => globalStore.assemblySize);
 const props = withDefaults(
     defineProps<{
         labelWidth: string;
