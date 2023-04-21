@@ -32,6 +32,7 @@ module.exports = defineConfig({
                 ignores: ['Application']
             }
         ],
+        '@typescript-eslint/no-namespace': 'off',
         '@typescript-eslint/ban-ts-ignore': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
