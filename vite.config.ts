@@ -7,7 +7,7 @@ import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import setupExtend from 'vite-plugin-vue-setup-extend';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
-
+import vueJsx from '@vitejs/plugin-vue-jsx';
 // https://vitejs.dev/config/
 const path = require('path');
 const resolve = (dir: string) => path.resolve(__dirname, dir);
@@ -37,8 +37,8 @@ export default (configEnv: ConfigEnv): UserConfigExport => {
             rollupOptions: {
                 output: {
                     // Static resource classification and packaging
-                    chunkFileNames: 'assets/js/[name]-[hash].js',
-                    entryFileNames: 'assets/js/[name]-[hash].js',
+                    chunkFileNames: 'js/[name]-[hash].js',
+                    entryFileNames: 'js/[name]-[hash].js',
                     assetFileNames: 'assets/[ext]/[name]-[hash].[ext]'
                 }
             }
@@ -61,6 +61,8 @@ export default (configEnv: ConfigEnv): UserConfigExport => {
         plugins: [
             vue(),
             setupExtend(),
+            // * vite 可以使用 jsx/tsx 语法
+            vueJsx(),
             // 增加下面的配置项,这样在运行时就能检查eslint规范
             eslintPlugin({
                 include: [
