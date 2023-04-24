@@ -24,13 +24,24 @@ export default (configEnv: ConfigEnv): UserConfigExport => {
         },
         // 编译
         build: {
-            chunkSizeWarningLimit: 2000,
             //编译目录
-            outDir: './dist',
+            outDir: 'dist',
+            minify: 'esbuild',
+            chunkSizeWarningLimit: 1500,
             //编译时是否自动清空目录
             emptyOutDir: true,
             /** 打包后静态资源目录 */
-            assetsDir: 'static'
+            // assetsDir: 'assets',
+            // 设置最终构建的浏览器兼容目标
+            target: 'es2015',
+            rollupOptions: {
+                output: {
+                    // Static resource classification and packaging
+                    chunkFileNames: 'assets/js/[name]-[hash].js',
+                    entryFileNames: 'assets/js/[name]-[hash].js',
+                    assetFileNames: 'assets/[ext]/[name]-[hash].[ext]'
+                }
+            }
         },
         server: {
             https: false, //本地环境不用https
