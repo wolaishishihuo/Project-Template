@@ -34,3 +34,5 @@ declare interface ViteEnv {
     VITE_PROXY: [string, string][];
 }
 declare type Recordable<T = any> = Record<string, T>;
+
+declare module 'sortablejs';

@@ -1,39 +1,43 @@
 {
     "compilerOptions": {
-        "target": "esnext",
-        "useDefineForClassFields": true,
-        "module": "esnext",
-        "moduleResolution": "node",
-        "strict": true,
-        "jsx": "preserve",
-
-        "importHelpers": true,
-        "experimentalDecorators": true,
-        "allowSyntheticDefaultImports": true,
-
-        "sourceMap": true,
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "esModuleInterop": true,
-        "lib": ["esnext", "dom"],
-        "skipLibCheck": true,
-        "outDir": "./dist", // 指定输出目录
-        "baseUrl": "./",
-        "paths": {
-            "@": ["src"],
-            "@/*": ["src/*"]
-        },
-        "types": ["node", "vite/client"]
+      "target": "ESNext",
+      "useDefineForClassFields": true,
+      "module": "ESNext",
+      "moduleResolution": "Node",
+      "types": ["vite/client", "element-plus/global"],
+  
+      /* Strict Type-Checking Options */
+      "strict": true /* Enable all strict type-checking options. */,
+      // "noImplicitAny": true,                 /* Raise error on expressions and declarations with an implied 'any' type. */
+      // "strictNullChecks": true,              /* Enable strict null checks. */
+      // "strictFunctionTypes": true,           /* Enable strict checking of function types. */
+      // "strictBindCallApply": true,           /* Enable strict 'bind', 'call', and 'apply' methods on functions. */
+      // "strictPropertyInitialization": true,  /* Enable strict checking of property initialization in classes. */
+      // "noImplicitThis": true,                /* Raise error on 'this' expressions with an implied 'any' type. */
+      // "alwaysStrict": true,                  /* Parse in strict mode and emit "use strict" for each source file. */
+  
+      "jsx": "preserve",
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "esModuleInterop": true,
+      "lib": ["ESNext", "DOM"],
+      "skipLibCheck": true,
+      "noEmit": true,
+      "baseUrl": "./",
+      "paths": {
+        "@": ["src"],
+        "@/*": ["src/*"]
+      }
     },
     "include": [
-        "src/**/*.ts",
-        "src/**/*.d.ts",
-        "src/**/*.tsx",
-        "src/**/*.vue",
-        "build/**/*.ts",
-        "build/**/*.d.ts",
-        "vite.config.ts"
+      "src/**/*.ts",
+      "src/**/*.d.ts",
+      "src/**/*.tsx",
+      "src/**/*.vue",
+      "build/**/*.ts",
+      "build/**/*.d.ts",
+      "vite.config.ts"
     ],
-    /** 编译器默认排除的编译文件 */
     "exclude": ["node_modules", "dist", "**/*.js"]
-}
+  }
+  
