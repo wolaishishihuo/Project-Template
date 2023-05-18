@@ -37,8 +37,6 @@ export const initDynamicRouter = async () => {
             if (item.component && isString(item.component)) {
                 item.component = modules['/src/views' + item.component + '.vue'];
             }
-            console.log(item);
-
             if (item.meta.isFull) {
                 router.addRoute(item);
             } else {
