@@ -68,6 +68,7 @@ module.exports = defineConfig({
         'vue/multiline-html-element-content-newline': 'off',
         'vue/singleline-html-element-content-newline': 'off',
         'vue/attribute-hyphenation': 'off',
+        'vue/no-mutating-props': 'off', // 不允许组件 prop的改变
         'vue/require-default-prop': 'off',
         'vue/html-self-closing': [
             'error',

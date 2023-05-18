@@ -1,4 +1,13 @@
 <template>
+    <!-- 查询表单 card -->
+    <SearchForm
+        :search="search"
+        :reset="reset"
+        :columns="searchColumns"
+        :search-param="searchParam"
+        :search-col="searchCol"
+        v-show="isShowSearch"
+    />
     <el-table
         ref="tableRef"
         v-bind="$attrs"
@@ -52,11 +61,13 @@
 <script lang="ts" setup>
 import { ref, provide, onMounted, watch } from 'vue';
 import { ElTable, TableProps } from 'element-plus';
-import { BreakPoint, ColumnProps } from './interface';
+import { ColumnProps } from '@/core/proTable/interface';
+import { BreakPoint } from '@/components/Grid/interface';
 import { useTable } from '@/hooks/useTable';
 import { handleProp } from './utils';
 import Pagination from './components/Pagination.vue';
 import TableColumn from './components/TableColumn.vue';
+import SearchForm from '@/core/serchForm/index.vue';
 
 interface ProTableProps extends Partial<Omit<TableProps<any>, 'data'>> {
     columns: ColumnProps[]; // 列配置项

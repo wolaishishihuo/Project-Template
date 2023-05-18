@@ -76,7 +76,8 @@ const getTableList = () => {
     });
 };
 // 表格配置项
-const columns: ColumnProps<any>[] = [
+// 表格配置项
+const columns: ColumnProps[] = [
     { type: 'selection', fixed: 'left', width: 80 },
     { type: 'index', label: '#', width: 80 },
     { type: 'expand', label: 'Expand', width: 100 },
@@ -101,7 +102,10 @@ const columns: ColumnProps<any>[] = [
         label: '性别',
         // 字典数据
         // enum: genderType,
-        enum: [],
+        // 字典请求不带参数
+        // enum: getUserGender,
+        // 字典请求携带参数
+        // enum: () => getUserGender({ id: 1 }),
         search: { el: 'select', props: { filterable: true } },
         fieldNames: { label: 'genderLabel', value: 'genderValue' }
     },
