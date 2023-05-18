@@ -35,8 +35,10 @@ export const initDynamicRouter = async () => {
         authStore.flatMenuListGet.forEach((item: any) => {
             item.children && delete item.children;
             if (item.component && isString(item.component)) {
-                item.component = modules['../../views' + item.component + '.vue'];
+                item.component = modules['/src/views' + item.component + '.vue'];
             }
+            console.log(item);
+
             if (item.meta.isFull) {
                 router.addRoute(item);
             } else {
