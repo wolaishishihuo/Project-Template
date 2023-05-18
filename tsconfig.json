@@ -20,6 +20,7 @@
         "outDir": "./dist", // 指定输出目录
         "baseUrl": "./",
         "paths": {
+            "@": ["src"],
             "@/*": ["src/*"]
         },
         "types": ["node", "vite/client"]
@@ -29,7 +30,8 @@
         "src/**/*.d.ts",
         "src/**/*.tsx",
         "src/**/*.vue",
-        "types/**/*.d.ts",
+        "build/**/*.ts",
+        "build/**/*.d.ts",
         "vite.config.ts"
     ],
     /** 编译器默认排除的编译文件 */
