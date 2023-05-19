@@ -8,7 +8,6 @@
             :colLayout="{ span: 24 }"
         />
     </div>
-    <component :is="`el-input`" />
 </template>
 
 <script setup lang="ts" name="useDynamicForm">

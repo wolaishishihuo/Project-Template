@@ -4,6 +4,7 @@ import { setupRouter } from './router';
 const app = createApp(App);
 import { setupAssets, setupElement, setupCustomComponents } from '@/plugins';
 import { setupStore } from '@/store';
+
 function setupPlugins() {
     // 注册全局常用的UI组件
     setupElement(app);

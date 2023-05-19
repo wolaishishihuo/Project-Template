@@ -206,7 +206,7 @@
 			}
 		},
         {
-            "path": "/about/index",
+            "path": "/about",
             "name": "about",
             "component": "/about/index",
             "meta": {
