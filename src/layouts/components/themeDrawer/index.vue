@@ -6,7 +6,7 @@
             布局切换
         </el-divider>
         <div class="layout-box mb30">
-            <el-tooltip effect="dark" content="纵向" placement="top" :show-after="200">
+            <!-- <el-tooltip effect="dark" content="纵向" placement="top" :show-after="200">
                 <div
                     :class="['layout-item layout-vertical', { 'is-active': layout == 'vertical' }]"
                     @click="setLayout('vertical')"
@@ -18,7 +18,7 @@
                     </div>
                     <el-icon v-if="layout == 'vertical'"><CircleCheckFilled /></el-icon>
                 </div>
-            </el-tooltip>
+            </el-tooltip> -->
             <el-tooltip effect="dark" content="经典" placement="top" :show-after="200">
                 <div
                     :class="['layout-item layout-classic', { 'is-active': layout == 'classic' }]"
@@ -45,7 +45,7 @@
                     <el-icon v-if="layout == 'transverse'"><CircleCheckFilled /></el-icon>
                 </div>
             </el-tooltip>
-            <el-tooltip effect="dark" content="分栏" placement="top" :show-after="200">
+            <!-- <el-tooltip effect="dark" content="分栏" placement="top" :show-after="200">
                 <div
                     :class="['layout-item layout-columns', { 'is-active': layout == 'columns' }]"
                     @click="setLayout('columns')"
@@ -55,7 +55,7 @@
                     <div class="layout-content"></div>
                     <el-icon v-if="layout == 'columns'"><CircleCheckFilled /></el-icon>
                 </div>
-            </el-tooltip>
+            </el-tooltip> -->
         </div>
 
         <!-- 全局主题 -->

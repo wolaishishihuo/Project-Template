@@ -15,6 +15,8 @@ export const useTheme = () => {
 
     // 切换暗黑模式 ==> 并带修改主题颜色、侧边栏颜色
     const switchDark = () => {
+        console.log(1);
+
         const html = document.documentElement as HTMLElement;
         if (isDark.value) html.setAttribute('class', 'dark');
         else html.setAttribute('class', '');
@@ -69,7 +71,10 @@ export const useTheme = () => {
         if (layout.value == 'vertical' && asideInverted.value) type = 'inverted';
         // 侧边栏 dark 模式
         if (isDark.value) type = 'dark';
+
         const theme = asideTheme[type!];
+        console.log(theme);
+        console.log(type);
         for (const [key, value] of Object.entries(theme)) {
             document.documentElement.style.setProperty(key, value);
         }
