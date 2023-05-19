@@ -32,7 +32,7 @@
         >
             <div class="logo flx-center">
                 <span class="logo-text" v-show="subMenuList.length">{{
-                    isCollapse ? 'G' : 'Geeker Admin'
+                    isCollapse ? 'G' : 'Jname Admin'
                 }}</span>
             </div>
             <el-scrollbar>
