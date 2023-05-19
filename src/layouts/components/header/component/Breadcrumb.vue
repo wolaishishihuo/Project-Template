@@ -26,7 +26,7 @@ import { computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useGlobalStore } from '@/store/module/global';
 import { useAuthStore } from '@/store/module/auth';
-import { HOME_URL } from '@/config/config';
+import { HOME_URL } from '@/config';
 const route = useRoute();
 const router = useRouter();
 const authStore = useAuthStore();

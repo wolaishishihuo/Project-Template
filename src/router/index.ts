@@ -1,8 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import type { App } from 'vue';
 import { staticRouter, errorRouter } from './module/staticRoutes';
-import { LOGIN_URL, ROUTER_WHITE_LIST } from '@/config/config';
-import NProgress from '@/plugins/nprogress';
+import { LOGIN_URL, ROUTER_WHITE_LIST } from '@/config';
+import NProgress from '@/config/nprogress';
 import { useAuthStore } from '@/store/module/auth';
 import { useGlobalStore } from '@/store/module/global';
 import { initDynamicRouter } from './module/asyncRoutes';

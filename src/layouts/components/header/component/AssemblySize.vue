@@ -5,11 +5,11 @@
             <el-dropdown-menu>
                 <el-dropdown-item
                     v-for="item in assemblySizeList"
-                    :key="item"
-                    :disabled="assemblySize === item"
-                    :command="item"
+                    :key="item.value"
+                    :command="item.value"
+                    :disabled="assemblySize === item.value"
                 >
-                    {{ assemblySizeListCh[item] }}
+                    {{ item.label }}
                 </el-dropdown-item>
             </el-dropdown-menu>
         </template>
@@ -17,21 +17,21 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, computed } from 'vue';
+import { computed } from 'vue';
 import { useGlobalStore } from '@/store/module/global';
 import { AssemblySizeType } from '@/store/interface';
 
 const globalStore = useGlobalStore();
 const assemblySize = computed(() => globalStore.assemblySize);
-const assemblySizeList: AssemblySizeType[] = ['default', 'large', 'small'];
-const assemblySizeListCh = reactive<{ [key: string]: string }>({
-    default: '默认',
-    large: '大型',
-    small: '小型'
-});
+
+const assemblySizeList = [
+    { label: '默认', value: 'default' },
+    { label: '大型', value: 'large' },
+    { label: '小型', value: 'small' }
+];
+
 const setAssemblySize = (item: AssemblySizeType) => {
     if (assemblySize.value === item) return;
-    globalStore.setAssemblySizeSize(item);
+    globalStore.setGlobalState('assemblySize', item);
 };
 </script>
-<style lang="less" scoped></style>

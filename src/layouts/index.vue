@@ -1,5 +1,5 @@
 <template>
-    <component :is="LayoutComponents[themeConfig.layout]" />
+    <component :is="LayoutComponents[layout]" />
     <ThemeDrawer />
 </template>
 
@@ -15,6 +15,6 @@ const LayoutComponents: { [key: string]: Component } = {
     transverse: layoutTransverse
 };
 const globalStore = useGlobalStore();
-const themeConfig = computed(() => globalStore.themeConfig);
+const layout = computed(() => globalStore.layout);
 </script>
 <style scoped lang="less"></style>

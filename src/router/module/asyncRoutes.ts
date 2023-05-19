@@ -1,7 +1,7 @@
 import { useAuthStore } from '@/store/module/auth';
 import router from '@/router';
 import { useGlobalStore } from '@/store/module/global';
-import { LOGIN_URL } from '@/config/config';
+import { LOGIN_URL } from '@/config';
 import { ElNotification } from 'element-plus';
 
 // 引入 views 文件夹下所有 vue 文件

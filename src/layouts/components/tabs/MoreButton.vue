@@ -29,7 +29,7 @@
 import { inject, nextTick } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useTabStore } from '@/store/module/tabs';
-import { HOME_URL } from '@/config/config';
+import { HOME_URL } from '@/config';
 const tabStore = useTabStore();
 const route = useRoute();
 const router = useRouter();

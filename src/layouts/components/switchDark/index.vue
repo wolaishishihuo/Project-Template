@@ -1,6 +1,6 @@
 <template>
     <el-switch
-        v-model="themeConfig.isDark"
+        v-model="isDark"
         @change="switchDark"
         inline-prompt
         :active-icon="Sunny"
@@ -17,5 +17,5 @@ import { useTheme } from '@/hooks/useTheme';
 const { switchDark } = useTheme();
 
 const globalStore = useGlobalStore();
-const themeConfig = computed(() => globalStore.themeConfig);
+const isDark = computed(() => globalStore.isDark);
 </script>

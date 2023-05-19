@@ -1,22 +1,17 @@
 <template>
-    <el-icon class="collapse-icon" @click="collapse">
-        <component :is="themeConfig.isCollapse ? 'expand' : 'fold'" />
+    <el-icon class="collapse-icon" @click="changeCollapse">
+        <component :is="globalStore.isCollapse ? 'expand' : 'fold'" />
     </el-icon>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
 import { useGlobalStore } from '@/store/module/global';
 
 const globalStore = useGlobalStore();
-const themeConfig = computed(() => globalStore.themeConfig);
-
-const collapse = () => {
-    globalStore.setThemeConfig({ ...themeConfig.value, isCollapse: !themeConfig.value.isCollapse });
-};
+const changeCollapse = () => globalStore.setGlobalState('isCollapse', !globalStore.isCollapse);
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .collapse-icon {
     margin-right: 20px;
     font-size: 22px;

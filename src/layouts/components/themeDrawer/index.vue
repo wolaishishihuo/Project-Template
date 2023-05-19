@@ -109,7 +109,7 @@ import { ref, computed, watch } from 'vue';
 import { useTheme } from '@/hooks/useTheme';
 import { useGlobalStore } from '@/store/module/global';
 import { LayoutType } from '@/store/interface';
-import { DEFAULT_PRIMARY } from '@/config/config';
+import { DEFAULT_PRIMARY } from '@/config';
 import SwitchDark from '../switchDark/index.vue';
 import mittBus from '@/utils/mittBus';
 

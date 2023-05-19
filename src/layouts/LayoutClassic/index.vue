@@ -52,7 +52,7 @@ const activeMenu = computed<any>(() =>
     route.meta.activeMenu ? route.meta.activeMenu : route.path
 );
 const isCollapse = computed<boolean>(() => {
-    return globalStore.themeConfig.isCollapse;
+    return globalStore.isCollapse;
 });
 const menuList = computed(() => {
     return authStore.showMenuListGet;

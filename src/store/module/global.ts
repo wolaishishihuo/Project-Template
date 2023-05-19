@@ -1,66 +1,49 @@
 import { defineStore } from 'pinia';
+import { GlobalState } from '@/store/interface';
+import { DEFAULT_PRIMARY } from '@/config';
 import piniaPersistConfig from '@/config/piniaPersist';
-import { GlobalState, ThemeConfigProps, AssemblySizeType } from '../interface';
-import { DEFAULT_PRIMARY } from '@/config/config';
 
-// 第一个参数是应用程序中 store 的唯一 id
-export const useGlobalStore = defineStore('GlobalState', {
-    // 其它配置项
-    state: (): GlobalState => {
-        return {
-            // token
-            token: '11',
-            // userInfo
-            userInfo: '',
-            // element组件大小
-            assemblySize: 'default',
-            // language
-            language: '',
-            themeConfig: {
-                // 折叠菜单
-                isCollapse: false,
-                // 当前页面是否全屏
-                maximize: false,
-                // 布局切换 ==>  纵向：vertical | 经典：classic | 横向：transverse | 分栏：columns
-                layout: 'classic',
-                // 默认 primary 主题颜色
-                primary: DEFAULT_PRIMARY,
-                // 深色模式
-                isDark: false,
-                // 灰色模式
-                isGrey: false,
-                // 色弱模式
-                isWeak: false,
-                // 面包屑导航
-                breadcrumb: true,
-                // 面包屑导航图标
-                breadcrumbIcon: true,
-                // 标签页
-                tabs: true,
-                // 标签页图标
-                tabsIcon: true,
-                // 页脚
-                footer: true
-            }
-        };
-    },
+export const useGlobalStore = defineStore({
+    id: 'geeker-global',
+    // 修改默认值之后，需清除 localStorage 数据
+    state: (): GlobalState => ({
+        // 布局模式 (纵向：vertical | 经典：classic | 横向：transverse | 分栏：columns)
+        layout: 'vertical',
+        // element 组件大小
+        assemblySize: 'default',
+        // 当前系统语言
+        language: null,
+        // 当前页面是否全屏
+        maximize: false,
+        // 主题颜色
+        primary: DEFAULT_PRIMARY,
+        // 深色模式
+        isDark: false,
+        // 灰色模式
+        isGrey: false,
+        // 色弱模式
+        isWeak: false,
+        // 侧边栏反转 (目前仅支持 'vertical' 模式)
+        asideInverted: false,
+        // 折叠菜单
+        isCollapse: false,
+        // 面包屑导航
+        breadcrumb: true,
+        // 面包屑导航图标
+        breadcrumbIcon: true,
+        // 标签页
+        tabs: true,
+        // 标签页图标
+        tabsIcon: true,
+        // 页脚
+        footer: true
+    }),
     getters: {},
     actions: {
-        setThemeConfig(themeConfig: ThemeConfigProps) {
-            this.themeConfig = themeConfig;
-        },
-        setToken(token: string) {
-            this.token = token;
-        },
-        setUserInfo(userInfo: any) {
-            this.userInfo = userInfo;
-        },
-        setAssemblySizeSize(assemblySize: AssemblySizeType) {
-            this.assemblySize = assemblySize;
-        },
-        updateLanguage(language: string) {
-            this.language = language;
+        // Set GlobalState
+        setGlobalState(...args: ObjToKeyValArray<GlobalState>) {
+            this.$patch({ [args[0]]: args[1] });
         }
     },
-    persist: piniaPersistConfig('GlobalState')
+    persist: piniaPersistConfig('geeker-global')
 });
