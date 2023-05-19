@@ -73,8 +73,6 @@ export const useTheme = () => {
         if (isDark.value) type = 'dark';
 
         const theme = asideTheme[type!];
-        console.log(theme);
-        console.log(type);
         for (const [key, value] of Object.entries(theme)) {
             document.documentElement.style.setProperty(key, value);
         }
