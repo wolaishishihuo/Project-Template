@@ -15,8 +15,6 @@ export const useTheme = () => {
 
     // 切换暗黑模式 ==> 并带修改主题颜色、侧边栏颜色
     const switchDark = () => {
-        console.log(1);
-
         const html = document.documentElement as HTMLElement;
         if (isDark.value) html.setAttribute('class', 'dark');
         else html.setAttribute('class', '');
