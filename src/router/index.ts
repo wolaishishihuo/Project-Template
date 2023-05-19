@@ -4,7 +4,7 @@ import { staticRouter, errorRouter } from './module/staticRoutes';
 import { LOGIN_URL, ROUTER_WHITE_LIST } from '@/config';
 import NProgress from '@/config/nprogress';
 import { useAuthStore } from '@/store/module/auth';
-import { useGlobalStore } from '@/store/module/global';
+import { useUserStore } from '@/store/module/user';
 import { initDynamicRouter } from './module/asyncRoutes';
 
 /**
@@ -36,7 +36,8 @@ const router = createRouter({
  * */
 router.beforeEach(async (to, from, next) => {
     const authStore = useAuthStore();
-    const globalStore = useGlobalStore();
+    const userStore = useUserStore();
+
     // 1.NProgress 开始
     NProgress.start();
 
@@ -46,7 +47,7 @@ router.beforeEach(async (to, from, next) => {
 
     // 3.判断是访问登陆页，有 Token 就在当前页面，没有 Token 重置路由并放行到登陆页
     if (to.path.toLocaleLowerCase() === LOGIN_URL) {
-        if (globalStore.token) return next(from.fullPath);
+        if (userStore.token) return next(from.fullPath);
         resetRouter();
         return next();
     }
@@ -54,7 +55,7 @@ router.beforeEach(async (to, from, next) => {
     if (ROUTER_WHITE_LIST.includes(to.path)) return next();
 
     // 5.判断是否有 Token，没有重定向到 login
-    if (!globalStore.token) return next({ path: LOGIN_URL, replace: true });
+    if (!userStore.token) return next({ path: LOGIN_URL, replace: true });
 
     // 6.如果没有菜单列表，就重新请求菜单列表并添加动态路由
     authStore.setRouteName(to.name as string);

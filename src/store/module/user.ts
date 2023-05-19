@@ -3,9 +3,9 @@ import { UserState } from '@/store/interface';
 import piniaPersistConfig from '@/config/piniaPersist';
 
 export const useUserStore = defineStore({
-    id: 'userStore',
+    id: 'geeker-user',
     state: (): UserState => ({
-        token: '',
+        token: '111',
         userInfo: { name: 'Geeker' }
     }),
     getters: {},

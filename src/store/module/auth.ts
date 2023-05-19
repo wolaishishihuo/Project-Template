@@ -5,7 +5,8 @@ import { AuthState } from '../interface';
 import { getShowMenuList, getFlatArr, getAllBreadcrumbList } from '../utils';
 
 // 用户权限
-export const useAuthStore = defineStore('AuthState', {
+export const useAuthStore = defineStore({
+    id: 'geeker-auth',
     state: (): AuthState => {
         return {
             // 当前页面的 router name，用来做按钮权限筛选

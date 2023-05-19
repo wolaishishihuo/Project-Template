@@ -16,5 +16,6 @@ const LayoutComponents: { [key: string]: Component } = {
 };
 const globalStore = useGlobalStore();
 const layout = computed(() => globalStore.layout);
+console.log(layout.value);
 </script>
 <style scoped lang="less"></style>

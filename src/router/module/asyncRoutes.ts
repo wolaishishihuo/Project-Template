@@ -1,8 +1,8 @@
-import { useAuthStore } from '@/store/module/auth';
 import router from '@/router';
-import { useGlobalStore } from '@/store/module/global';
 import { LOGIN_URL } from '@/config';
 import { ElNotification } from 'element-plus';
+import { useAuthStore } from '@/store/module/auth';
+import { useUserStore } from '@/store/module/user';
 
 // 引入 views 文件夹下所有 vue 文件
 const modules = import.meta.glob('@/views/**/*.vue');
@@ -12,7 +12,7 @@ import { isString } from '@/utils/is';
  */
 export const initDynamicRouter = async () => {
     const authStore = useAuthStore();
-    const globalStore = useGlobalStore();
+    const userStore = useUserStore();
     try {
         // 1.获取菜单列表 && 按钮权限（可合并到一个接口获取，根据后端不同可自行改造）
         await authStore.getAuthMenuList();
@@ -26,7 +26,7 @@ export const initDynamicRouter = async () => {
                 type: 'warning',
                 duration: 3000
             });
-            globalStore.setToken('');
+            userStore.setToken('');
             router.replace(LOGIN_URL);
             return Promise.reject('No permission');
         }
@@ -37,6 +37,8 @@ export const initDynamicRouter = async () => {
             if (item.component && isString(item.component)) {
                 item.component = modules['/src/views' + item.component + '.vue'];
             }
+            console.log(item);
+
             if (item.meta.isFull) {
                 router.addRoute(item);
             } else {
@@ -45,7 +47,7 @@ export const initDynamicRouter = async () => {
         });
     } catch (error) {
         // 💢 当按钮 || 菜单请求出错时，重定向到登陆页
-        globalStore.setToken('');
+        userStore.setToken('');
         router.replace(LOGIN_URL);
         return Promise.reject(error);
     }

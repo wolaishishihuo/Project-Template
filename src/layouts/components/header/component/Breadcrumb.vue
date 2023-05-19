@@ -1,5 +1,5 @@
 <template>
-    <div :class="['breadcrumb-box', !themeConfig.breadcrumbIcon && 'no-icon']">
+    <div :class="['breadcrumb-box', !breadcrumbIcon && 'no-icon']">
         <el-breadcrumb separator="/">
             <transition-group appear name="breadcrumb">
                 <el-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="item.path">
@@ -7,10 +7,7 @@
                         class="el-breadcrumb__inner is-link"
                         @click="onBreadcrumbClick(item, index)"
                     >
-                        <el-icon
-                            class="breadcrumb-icon"
-                            v-show="item.meta.icon && themeConfig.breadcrumbIcon"
-                        >
+                        <el-icon class="breadcrumb-icon" v-show="item.meta.icon && breadcrumbIcon">
                             <component :is="item.meta.icon" />
                         </el-icon>
                         <span class="breadcrumb-title">{{ item.meta.title }}</span>
@@ -31,7 +28,7 @@ const route = useRoute();
 const router = useRouter();
 const authStore = useAuthStore();
 const globalStore = useGlobalStore();
-const themeConfig = computed(() => globalStore.themeConfig);
+const breadcrumbIcon = computed(() => globalStore.breadcrumbIcon);
 const breadcrumbList = computed(() => {
     let breadcrumbData =
         authStore.breadcrumbListGet[route.matched[route.matched.length - 1].path] ?? [];

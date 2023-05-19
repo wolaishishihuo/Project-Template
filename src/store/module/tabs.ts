@@ -4,7 +4,8 @@ import router from '@/router/index';
 import piniaPersistConfig from '@/config/piniaPersist';
 
 // 用户权限
-export const useTabStore = defineStore('TabState', {
+export const useTabStore = defineStore({
+    id: 'geeker-tabs',
     state: (): TabsState => ({
         tabsMenuList: []
     }),

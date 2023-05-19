@@ -181,6 +181,6 @@ const drawerVisible = ref(false);
 mittBus.on('openThemeDrawer', () => (drawerVisible.value = true));
 </script>
 
-<style scoped lang="scss">
-@import './index.scss';
+<style scoped lang="less">
+@import './index.less';
 </style>
