@@ -1,5 +1,5 @@
 <template>
-    <div class="toolBarLeft">
+    <div class="tool-bar-lf">
         <CollapseIcon id="collapseIcon" />
         <Breadcrumb id="breadcrumb" v-if="breadcrumb" />
     </div>
@@ -14,8 +14,11 @@ const globalStore = useGlobalStore();
 const breadcrumb = computed(() => globalStore.breadcrumb);
 </script>
 <style scoped lang="less">
-.toolBarLeft {
+.tool-bar-lf {
     display: flex;
     align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    white-space: nowrap;
 }
 </style>

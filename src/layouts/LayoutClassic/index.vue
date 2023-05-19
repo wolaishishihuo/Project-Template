@@ -1,34 +1,37 @@
 <template>
     <!-- 经典布局 -->
     <el-container class="layout">
-        <el-aside>
-            <div class="menu" :style="{ width: isCollapse ? '65px' : '210px' }">
-                <div class="logo">
-                    <img src="@/assets/images/logo.svg" alt="logo" />
-                    <span v-show="!isCollapse">Jname Admin</span>
+        <el-header>
+            <div class="header-lf">
+                <div class="logo flx-center">
+                    <img class="logo-img" src="@/assets/images/logo.svg" alt="logo" />
+                    <span class="logo-text">Jname Admin</span>
                 </div>
-                <el-scrollbar>
-                    <el-menu
-                        :default-active="activeMenu"
-                        :router="false"
-                        :collapse="isCollapse"
-                        :collapse-transition="false"
-                        :unique-opened="true"
-                        background-color="#191a20"
-                        text-color="#bdbdc0"
-                        active-text-color="#ffffff"
-                    >
-                        <SubMenu :menuList="menuList" />
-                    </el-menu>
-                </el-scrollbar>
-            </div>
-        </el-aside>
-        <el-container>
-            <el-header>
                 <ToolBarLeft />
+            </div>
+            <div class="header-ri">
                 <ToolBarRight />
-            </el-header>
-            <Main />
+            </div>
+        </el-header>
+        <el-container class="classic-content">
+            <el-aside>
+                <div class="aside-box" :style="{ width: isCollapse ? '65px' : '210px' }">
+                    <el-scrollbar>
+                        <el-menu
+                            :default-active="activeMenu"
+                            :router="false"
+                            :collapse="isCollapse"
+                            :collapse-transition="false"
+                            :unique-opened="true"
+                        >
+                            <SubMenu :menuList="menuList" />
+                        </el-menu>
+                    </el-scrollbar>
+                </div>
+            </el-aside>
+            <el-container class="classic-main">
+                <Main />
+            </el-container>
         </el-container>
     </el-container>
 </template>
