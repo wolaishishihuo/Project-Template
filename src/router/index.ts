@@ -58,11 +58,11 @@ router.beforeEach(async (to, from, next) => {
     if (!userStore.token) return next({ path: LOGIN_URL, replace: true });
 
     // 6.如果没有菜单列表，就重新请求菜单列表并添加动态路由
-    authStore.setRouteName(to.name as string);
     if (!authStore.authMenuListGet.length) {
         await initDynamicRouter();
         return next({ ...to, replace: true });
     }
+    authStore.setRouteName(to.name as string);
     // 7.正常访问页面
     next();
 });

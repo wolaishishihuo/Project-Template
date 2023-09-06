@@ -32,24 +32,10 @@
                 {
 					"path": "/example/useProTable",
 					"name": "useProTable",
-					"component": "/example/useProTable/index",
+					"component": "/example/seamlessScroll/index",
 					"meta": {
 						"icon": "Menu",
-						"title": "使用表格",
-						"isLink": "",
-						"isHide": false,
-						"isFull": false,
-						"isAffix": false,
-						"isKeepAlive": true
-					}
-				},
-                {
-					"path": "/example/useDynamicForm",
-					"name": "useDynamicForm",
-					"component": "/example/useDynamicForm/index",
-					"meta": {
-						"icon": "Menu",
-						"title": "使用表单",
+						"title": "无缝滚动",
 						"isLink": "",
 						"isHide": false,
 						"isFull": false,
@@ -57,6 +43,7 @@
 						"isKeepAlive": true
 					}
 				}
+                
                 
             ]
 		},
