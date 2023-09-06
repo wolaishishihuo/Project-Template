@@ -5,12 +5,23 @@
         <tank-seamless-scroll :virtual="true" :step-length="stepLength" :debug="debug">
             <div v-for="(v, i) in count" :key="i">value:{{ v }},key:{{ i }}</div>
         </tank-seamless-scroll>
+        <tank-seamless-scroll :virtual="true" :step-length="stepLength" :debug="debug">
+            <div v-for="(v, i) in count" :key="i">value:{{ v }},key:{{ i }}</div>
+        </tank-seamless-scroll>
+        <tank-seamless-scroll :virtual="true" :step-length="stepLength" :debug="debug">
+            <div v-for="(v, i) in count" :key="i">value:{{ v }},key:{{ i }}</div>
+        </tank-seamless-scroll>
+        <tank-seamless-scroll :virtual="true" :step-length="stepLength" :debug="debug">
+            <div v-for="(v, i) in count" :key="i">value:{{ v }},key:{{ i }}</div>
+        </tank-seamless-scroll>
+        <tank-seamless-scroll :virtual="true" :step-length="stepLength" :debug="debug">
+            <div v-for="(v, i) in count" :key="i">value:{{ v }},key:{{ i }}</div>
+        </tank-seamless-scroll>
     </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
-import TankSeamlessScroll from '@/components/virtual/index.vue';
-
+import TankSeamlessScroll from '@/components/Virtual/virtual.vue';
 const prop = defineProps({
     stepLength: {
         type: Number,
@@ -19,7 +30,7 @@ const prop = defineProps({
 
     debug: {
         type: Boolean,
-        default: false
+        default: true
     },
     height: {
         type: Number,
@@ -31,7 +42,7 @@ const add = () => {
     count.value.push(count.value.length + 1);
 };
 const reflash = () => {
-    count.value = new Array(20).fill(null);
+    count.value = new Array(500).fill(null);
 };
 </script>
 <style scoped>

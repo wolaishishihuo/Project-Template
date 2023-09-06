@@ -9,6 +9,7 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 import en from 'element-plus/dist/locale/en.mjs';
 import { useTheme } from '@/hooks/useTheme';
 import { useGlobalStore } from '@/store/module/global';
+
 const globalStore = useGlobalStore();
 const { initTheme } = useTheme();
 initTheme();

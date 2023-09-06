@@ -18,7 +18,7 @@
 		{
 			"path": "/example",
             "name": "example",
-            "redirect": "/example/useProTable",
+            "redirect": "/example/seamlessScroll",
 			"meta": {
 				"icon": "MessageBox",
 				"title": "模板示例",
@@ -30,8 +30,8 @@
 			},
             "children":[
                 {
-					"path": "/example/useProTable",
-					"name": "useProTable",
+					"path": "/example/seamlessScroll",
+					"name": "seamlessScroll",
 					"component": "/example/seamlessScroll/index",
 					"meta": {
 						"icon": "Menu",
