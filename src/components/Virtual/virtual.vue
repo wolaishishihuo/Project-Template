@@ -1,233 +1,176 @@
 <template>
-    <div class="screenDisplayEffect" ref="screenDisplayEffectRef">
-        <div class="fixed" v-if="displayType == DisplayType.FIXED" :style="effectTypeStyle">
-            <div
-                v-for="(data, index) in displayData"
-                :key="index"
-                :style="`width:${100 / columnNum}%;`"
-            >
-                <slot :data="data" :count="index"></slot>
-            </div>
-        </div>
-        <div class="fixed" v-else-if="displayType == DisplayType.SWITCH" :style="effectTypeStyle">
-            <div
-                v-for="(data, index) in currentPageData"
-                :key="index"
-                :style="`width:${100 / columnNum}%;`"
-            >
-                <slot :data="data" :count="index"></slot>
-            </div>
-        </div>
-        <div ref="scrollRef" class="scroll" v-else :style="{ ...effectTypeStyle }">
-            <div
-                v-for="(data, index) in displayData"
-                :key="index"
-                :style="`width:${100 / columnNum}%;`"
-            >
-                <slot :data="data" :count="index"></slot>
-            </div>
-        </div>
-        <template v-if="displayType == DisplayType.SCROLL">
-            <div v-show="isScrolling" ref="scrollRef1" :style="{ ...effectTypeStyle }">
-                <div
-                    v-for="(data, index) in displayDataCopy"
-                    :key="index"
-                    :style="`width:${100 / columnNum}%;`"
-                >
-                    <slot :data="data" :count="index"></slot>
+    <div
+        :class="['base-virtual-wrapper', className]"
+        ref="wrapperRef"
+        :style="getWrapperStyle"
+        @scroll="onScroll"
+    >
+        <div class="base-virtual-inner" ref="innerRef" :style="getInnerStyle">
+            <div class="base-virtual-list" :style="getListStyle" ref="virtualListRef">
+                <div v-for="(item, index) in clientData" :key="index + state.start">
+                    <slot name="default" :item="item"></slot>
                 </div>
             </div>
-        </template>
+        </div>
     </div>
 </template>
 
-<script setup lang="ts">
-import { nextTick, onUnmounted } from 'vue';
-import { watch, toRefs, computed, CSSProperties, ref } from 'vue';
-import { debounce } from 'lodash';
+<script lang="ts" setup>
+import { computed, onUpdated, reactive, ref, unref, watchEffect } from 'vue';
+import virtualProps from './props';
+import { isNumber, isString } from '@/utils/is';
 
-enum DisplayType {
-    SCROLL = 0,
-    SWITCH,
-    FIXED
-}
-const props = withDefaults(
-    defineProps<{
-        displayType: number;
-        effectType?: 'normal' | 'largeContainer';
-        displayData: Array<any>;
-        rowNum?: number;
-        columnNum?: number;
-        scrollStep?: number;
-        scrollDirection?: string;
-        switchStep?: number;
-    }>(),
-    {
-        effectType: 'normal',
-        scrollDirection: 'top',
-        displayType: 2,
-        displayData: () => [],
-        rowNum: 5,
-        columnNum: 5,
-        scrollStep: 1,
-        switchStep: 5
-    }
-);
+const props = defineProps(virtualProps);
 
-const {
-    displayType,
-    displayData,
-    rowNum,
-    effectType,
-    columnNum,
-    scrollStep,
-    scrollDirection,
-    switchStep
-} = toRefs(props);
-const effectTypeStyle = computed<CSSProperties>(() => {
-    const style: CSSProperties = {
-        display: 'flex',
-        flexDirection: effectType.value === 'largeContainer' ? 'row' : 'column'
+const state = reactive<any>({
+    start: 0,
+    end: 10,
+    scrollOffset: 0,
+    cacheData: []
+});
+const virtualListRef = ref();
+
+const getWrapperStyle = computed(() => {
+    const { style, height, width } = props;
+    const styleObj = isString(style) ? JSON.parse(style) : { ...style };
+    return {
+        height: `${height}px`,
+        width: isNumber(width) ? `${width}px` : width,
+        ...styleObj
     };
-    if (effectType.value === 'largeContainer' || scrollDirection.value !== 'top') {
-        style.flexWrap = 'wrap';
-    }
-    return style;
 });
 
-const screenDisplayEffectRef = ref<HTMLDivElement | null>(null);
-const scrollRef = ref<HTMLDivElement | null>(null);
-const scrollRef1 = ref<HTMLDivElement | null>(null);
-
-// 切换 / 滚动 开始数值
-let startNum = 0;
-// 分页大小
-let switchSize = 0;
-// 数据拷贝
-const displayDataCopy = ref([]);
-// 当前页
-const currentPage = ref(1);
-// 是否滚动
-const isScrolling = ref(false);
-// 区域内动画展示时长
-const areaShowTime = 5;
-const animationTime = computed(() => areaShowTime + (1 - scrollStep.value));
-
-const displayTypeFnMap = {
-    /**
-     * @description 切换效果
-     */
-    [DisplayType.SWITCH]: () => {
-        switchSize = Math.ceil(displayData.value.length / startNum);
-        runSwitch();
-    },
-    /**
-     * @description 滚动效果
-     */
-    [DisplayType.SCROLL]: () => {
-        nextTick(() => {
-            const scrollHeight = scrollRef.value.offsetHeight;
-            const effectHeight = screenDisplayEffectRef.value.offsetHeight;
-            isScrolling.value = scrollHeight > effectHeight;
-            const animationDuration =
-                animationTime.value +
-                (scrollHeight - effectHeight) * (animationTime.value / effectHeight);
-            scrollRef.value.classList.toggle('animate_up', isScrolling.value);
-            scrollRef1.value.classList.toggle('animate_up', isScrolling.value);
-            scrollRef.value.style.animationDuration = animationDuration + 's';
-            scrollRef1.value.style.animationDuration = animationDuration + 's';
-        });
-    }
-};
-
-// 获取当前页的数据
-const currentPageData = computed(() => {
-    const startIndex = (currentPage.value - 1) * startNum;
-    const endIndex = startIndex + startNum;
-    return displayDataCopy.value.slice(startIndex, endIndex);
+const getInnerStyle = computed(() => {
+    return {
+        height: `${unref(getTotalHeight)}px`,
+        width: '100%'
+    };
 });
-// 运行切换定时器
-let switchTimer: ReturnType<typeof setInterval> | null = null;
-const runSwitch = () => {
-    if (switchTimer) {
-        clearInterval(switchTimer);
-        switchTimer = null;
-    }
-    switchTimer = setInterval(
-        () => {
-            currentPage.value++;
-            if (currentPage.value > switchSize) {
-                currentPage.value = 1; // 回到第一页
-            }
-        },
-        switchStep.value ? switchStep.value * 1000 : 30000
+
+const getListStyle = computed(() => {
+    return {
+        willChange: 'transform',
+        transform: `translateY(${state.scrollOffset}px)`
+    };
+});
+
+// 数据数量
+const total = computed(() => {
+    return props.data.length;
+});
+
+// 总体高度
+const getTotalHeight = computed(() => {
+    if (!props.dynamic) return unref(total) * props.itemHeight;
+    return getCurrentTop(unref(total));
+});
+
+// 当前屏幕显示的数量
+const clientCount = computed(() => {
+    return Math.ceil(props.height / props.itemHeight);
+});
+
+// 当前屏幕显示的数据
+const clientData = computed(() => {
+    return props.data.slice(state.start, state.end);
+});
+
+const onScroll = (e: any) => {
+    const { scrollTop } = e.target;
+    if (state.scrollOffset === scrollTop) return;
+    const { cache, dynamic, itemHeight } = props;
+    const cacheCount = Math.max(1, cache);
+
+    let startIndex = dynamic ? getStartIndex(scrollTop) : Math.floor(scrollTop / itemHeight);
+
+    const endIndex = Math.max(
+        0,
+        Math.min(unref(total), startIndex + unref(clientCount) + cacheCount)
     );
+
+    if (startIndex > cacheCount) {
+        startIndex = startIndex - cacheCount;
+    }
+
+    // 偏移量
+    const offset = dynamic ? getCurrentTop(startIndex) : scrollTop - (scrollTop % itemHeight);
+
+    Object.assign(state, {
+        start: startIndex,
+        end: endIndex,
+        scrollOffset: offset
+    });
 };
 
-// 初始计算
-const initialize = debounce(() => {
-    displayDataCopy.value = [...displayData.value];
-    startNum = rowNum.value * columnNum.value;
-    displayTypeFnMap[displayType.value] && displayTypeFnMap[displayType.value]();
-}, 1000);
+// 二分法去查找对应的index
+const getStartIndex = (scrollTop = 0): number => {
+    let low = 0;
+    let high = state.cacheData.length - 1;
+    while (low <= high) {
+        const middle = low + Math.floor((high - low) / 2);
+        const middleTopValue = getCurrentTop(middle);
+        const middleBottomValue = getCurrentTop(middle + 1);
 
-// 监听props变化并触发初始计算
-watch(
-    [displayData, rowNum, columnNum, displayType],
-    () => {
-        if (displayData.value.length) {
-            initialize();
+        if (middleTopValue <= scrollTop && scrollTop <= middleBottomValue) {
+            return middle;
+        } else if (middleBottomValue < scrollTop) {
+            low = middle + 1;
+        } else if (middleBottomValue > scrollTop) {
+            high = middle - 1;
         }
-    },
-    { immediate: true, deep: true } // 立即执行一次
-);
-
-onUnmounted(() => {
-    if (switchTimer) {
-        clearInterval(switchTimer);
-        switchTimer = null;
     }
+    return Math.min(unref(total) - unref(clientCount), Math.floor(scrollTop / props.itemHeight));
+};
+
+const getCurrentTop = (index: number) => {
+    const lastIndex = state.cacheData.length - 1;
+
+    if (Object.hasOwn(state.cacheData, index)) {
+        return state.cacheData[index].top;
+    } else if (Object.hasOwn(state.cacheData, index - 1)) {
+        return state.cacheData[index - 1].bottom;
+    } else if (index > lastIndex) {
+        return (
+            state.cacheData[lastIndex].bottom +
+            Math.max(0, index - state.cacheData[lastIndex].index) * props.itemHeight
+        );
+    } else {
+        return index * props.itemHeight;
+    }
+};
+
+onUpdated(() => {
+    if (!props.dynamic) return;
+    const childrenList = virtualListRef.value.children || [];
+    [...childrenList].forEach((node: any, index: number) => {
+        const height = node.getBoundingClientRect().height;
+        const currentIndex = state.start + index;
+        if (state.cacheData[currentIndex].height === height) return;
+
+        state.cacheData[currentIndex].height = height;
+        state.cacheData[currentIndex].top = getCurrentTop(currentIndex);
+        state.cacheData[currentIndex].bottom =
+            state.cacheData[currentIndex].top + state.cacheData[currentIndex].height;
+    });
+});
+
+watchEffect(() => {
+    clientData.value.forEach((_, index) => {
+        const currentIndex = state.start + index;
+        if (Object.hasOwn(state.cacheData, currentIndex)) return;
+        state.cacheData[currentIndex] = {
+            top: currentIndex * props.itemHeight,
+            height: props.itemHeight,
+            bottom: (currentIndex + 1) * props.itemHeight,
+            index: currentIndex
+        };
+    });
 });
 </script>
-<style scoped lang="less">
-.screenDisplayEffect {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-.animate_up {
-    animation-name: scrollUp;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    will-change: transform;
-    transform: translate3d(0, 0, 0);
-}
-.animate_left {
-    animation-name: scrollLeft;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    will-change: transform;
-    transform: translate3d(0, 0, 0);
-}
 
-@keyframes scrollUp {
-    0% {
-        transform: translateY(0);
-        -webkit-transform: translateY(0);
-    }
-    100% {
-        transform: translateY(-100%);
-        -webkit-transform: translateY(-100%);
-    }
-}
-@keyframes scrollLeft {
-    0% {
-        transform: translateX(5%);
-        -webkit-transform: translateX(5%);
-    }
-    100% {
-        transform: translateX(-100%);
-        -webkit-transform: translateX(-100%);
-    }
+<style lang="scss" scoped>
+.base-virtual-wrapper {
+    position: relative;
+    overflow-y: auto;
 }
 </style>
